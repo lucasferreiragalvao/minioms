@@ -4,6 +4,9 @@
   "description": "Mini OMS is an Order Management System with minimal functionality",
   "main": "src/index.ts",
   "scripts": {
+    "start": "pm2 start ./dist/index.js -i max -f --name minioms",
+    "monit": "pm2 monit",
+    "logs": "pm2 logs",
     "build": "rm -rf ./dist && tsc --build",
     "dev": "ts-node-dev src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,6 +23,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "pm2": "^5.2.0"
   }
 }
