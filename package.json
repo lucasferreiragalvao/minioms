@@ -1,0 +1,14 @@
+{
+  "name": "minioms",
+  "version": "1.0.0",
+  "description": "Mini OMS is an Order Management System with minimal functionality",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "OMS"
+  ],
+  "author": "Leandro Cruz",
+  "license": "ISC"
+}
