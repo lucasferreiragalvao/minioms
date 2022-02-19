@@ -10,5 +10,8 @@
     "OMS"
   ],
   "author": "Leandro Cruz",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  }
 }
