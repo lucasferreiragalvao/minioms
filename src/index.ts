@@ -1,5 +1,6 @@
 import app from './server';
+import config from './config';
 
-app.listen(3001, () => {
-    console.log('Listening on http://localhost:3001')
+app.listen(config.port, () => {
+    console.log(`Listening on http://localhost:${config.port}`);
 });

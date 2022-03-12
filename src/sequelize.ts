@@ -1,11 +1,14 @@
 import { Sequelize } from 'sequelize-typescript'
 import { Customer } from './api/customer/customer-model'
+import config from './config';
 
 const sequelize = new Sequelize({
-  database: 'minioms',
+  database: config.mysql.database,
+  host: config.mysql.host,
+  port: config.mysql.port,
   dialect: 'mysql',
-  username: 'root',
-  password: ''
+  username: config.mysql.username,
+  password: config.mysql.password
 });
 
 sequelize.addModels([
