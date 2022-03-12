@@ -9,8 +9,8 @@ type CustomerAttributes = {
     cnpj?: string;
     email: string;
     phone?: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 type CustomerCreationAttributes = Optional<CustomerAttributes, 'uuid' | 'createdAt' | 'updatedAt'>;
@@ -29,8 +29,8 @@ type CustomerCreationRequest = {
 
 type CustomerResponse = CustomerCreationRequest & {
     uuid: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export abstract class CustomerModel extends Model<CustomerAttributes, CustomerCreationAttributes>{};
@@ -42,6 +42,7 @@ export type CustomerCreationRequestHandler = RequestHandler<
     {}, // query params
     {
         customerToCreate: CustomerCreationAttributes
-        customerCreated: CustomerModel
+        customerCreated: CustomerAttributes,
+        customerToRespond: CustomerResponse
     }
 >;
