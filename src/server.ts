@@ -1,5 +1,7 @@
 import express, { Express } from 'express';
 import bodyParser from 'body-parser';
+import createCustomerRoute from './api/customer/customer-route';
+import { errors } from 'celebrate';
 
 class Server {
     app: Express;
@@ -8,6 +10,7 @@ class Server {
        this.app = express();
        this.addStartingMiddlewares();
        this.addRoutes();
+       this.addEndingMiddlwares();
     }
 
     private addStartingMiddlewares() {
@@ -15,12 +18,12 @@ class Server {
         this.app.use(bodyParser.json());
     }
 
+    private addEndingMiddlwares() {
+        this.app.use(errors());
+    }
+
     private addRoutes() {
-        this.app.get('/', (req, res) => {
-            res.json({
-                ok: 'Hello World!'
-            })
-        });
+        this.app.use(createCustomerRoute);
     }
 }
 
