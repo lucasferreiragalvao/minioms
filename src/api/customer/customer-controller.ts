@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { persistCustomer } from "./customer-business";
 import { createCustomerDeserializer } from "./customer-deserializer";
 import { createCustomerSerializer } from "./customer-serializer";
