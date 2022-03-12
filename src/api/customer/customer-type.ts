@@ -1,18 +1,18 @@
 import { Model } from "sequelize-typescript"
+import { Optional } from "sequelize/types"
 
-type CustomerCreationAttributes = {
+type CustomerAttributes = {
+    uuid: string;
     name: string;
     cpf?: string;
     cnpj?: string;
     email: string;
     phone?: string;
-}
-
-type CustomerAttributes = CustomerCreationAttributes & {
-    uuid: string;
     createdAt: string;
     updatedAt: string;
 }
+
+type CustomerCreationAttributes = Optional<CustomerAttributes, 'uuid' | 'createdAt' | 'updatedAt'>;
 
 type CustomerCreationRequest = {
     name: string;
@@ -26,5 +26,4 @@ type CustomerCreationRequest = {
     }
 }
 
-export abstract class CustomerModel extends 
-Model<CustomerAttributes, CustomerCreationAttributes>{};
+export abstract class CustomerModel extends Model<CustomerAttributes, CustomerCreationAttributes>{};
