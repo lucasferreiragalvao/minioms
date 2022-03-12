@@ -1,3 +1,4 @@
+import { RequestHandler } from "express";
 import { Model } from "sequelize-typescript"
 import { Optional } from "sequelize/types"
 
@@ -26,4 +27,21 @@ type CustomerCreationRequest = {
     }
 }
 
+type CustomerResponse = CustomerCreationRequest & {
+    uuid: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 export abstract class CustomerModel extends Model<CustomerAttributes, CustomerCreationAttributes>{};
+
+export type CustomerCreationRequestHandler = RequestHandler<
+    {}, // path params
+    CustomerResponse, // response
+    CustomerCreationRequest, // request
+    {}, // query params
+    {
+        customerToCreate: CustomerCreationAttributes
+        customerCreated: CustomerModel
+    }
+>;

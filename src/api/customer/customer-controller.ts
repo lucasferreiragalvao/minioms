@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
+import { CustomerCreationRequestHandler } from "./customer-type";
 import { createCustomerValidator } from "./customer-validator";
 
-const createCustomer = () => {
+const createCustomer = (): CustomerCreationRequestHandler[] => {
     return [
         createCustomerValidator(),
-        (req: Request, res: Response) => {
+        (req, res) => {
             res.json({
                 "meta": {
                     "version": "0.0.1",
