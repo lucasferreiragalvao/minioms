@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from "express"
-import { createCustomerValidator } from "./customer-validator"
+import { Request, Response } from "express";
+import { createCustomerValidator } from "./customer-validator";
 
 const createCustomer = () => {
     return [
@@ -36,4 +36,4 @@ const createCustomer = () => {
 
 export {
     createCustomer
-}
+};

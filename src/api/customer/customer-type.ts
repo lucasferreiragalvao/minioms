@@ -1,3 +1,5 @@
+import { Model } from "sequelize-typescript"
+
 type CustomerCreationAttributes = {
     name: string;
     cpf?: string;
@@ -23,3 +25,6 @@ type CustomerCreationRequest = {
         phone?: string;
     }
 }
+
+export abstract class CustomerModel extends 
+Model<CustomerAttributes, CustomerCreationAttributes>{};
