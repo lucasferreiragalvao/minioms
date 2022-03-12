@@ -1,3 +1,4 @@
+import { CREATED } from "http-status";
 import { persistCustomer } from "./customer-business";
 import { createCustomerDeserializer } from "./customer-deserializer";
 import { createCustomerSerializer } from "./customer-serializer";
@@ -10,7 +11,7 @@ const createCustomer = (): CustomerCreationRequestHandler[] => {
         createCustomerDeserializer,
         persistCustomer,
         createCustomerSerializer,
-        (req, res) => { res.status(201).json(res.locals.customerToRespond) }
+        (req, res) => { res.status(CREATED).json(res.locals.customerToRespond) }
     ]
 }
 

@@ -9,7 +9,7 @@
     "logs": "pm2 logs",
     "build": "rm -rf ./dist && tsc --build",
     "dev": "ts-node-dev src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -r ts-node/register './test/**/*.spec.ts'"
   },
   "keywords": [
     "OMS"
@@ -17,10 +17,17 @@
   "author": "Leandro Cruz",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.3.0",
+    "@types/chai-json-schema": "^1.4.6",
     "@types/express": "^4.17.13",
     "@types/express-mung": "^0.5.2",
+    "@types/mocha": "^9.1.0",
     "@types/node": "^17.0.21",
     "@types/validator": "^13.7.1",
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "chai-json-schema": "^1.5.1",
+    "mocha": "^9.2.2",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.5"
   },
@@ -30,6 +37,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-mung": "^0.5.1",
+    "http-status": "^1.5.0",
     "mysql2": "^2.3.3",
     "pm2": "^5.2.0",
     "reflect-metadata": "^0.1.13",
