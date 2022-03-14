@@ -5,6 +5,7 @@ import { errors } from 'celebrate';
 import { Sequelize } from 'sequelize-typescript';
 import { sequelize } from './sequelize';
 import { successResponseMiddlware } from './util/successResponseMIddleware';
+import { errorResponseMiddleware } from './util/errorResponseMiddlware';
 
 class Server {
     app: Express;
@@ -25,7 +26,7 @@ class Server {
     }
 
     private addEndingMiddlwares() {
-        this.app.use(errors());
+        this.app.use(errorResponseMiddleware);
     }
 
     private addRoutes() {
