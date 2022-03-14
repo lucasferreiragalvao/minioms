@@ -8,7 +8,8 @@ const sequelize = new Sequelize({
   port: config.mysql.port,
   dialect: 'mysql',
   username: config.mysql.username,
-  password: config.mysql.password
+  password: config.mysql.password,
+  logging: false
 });
 
 sequelize.addModels([
