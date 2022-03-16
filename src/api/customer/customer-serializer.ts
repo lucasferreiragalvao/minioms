@@ -1,4 +1,4 @@
-import { CustomerCreationRequestHandler, CustomerFindOneRequestHandler } from "./customer-type";
+import { CustomerCreationRequestHandler, CustomerFindAllRequestHandler, CustomerFindOneRequestHandler } from "./customer-type";
 
 const createCustomerSerializer: CustomerCreationRequestHandler = (req, res, next) => {
     const { customerCreated } = res.locals;
@@ -21,7 +21,7 @@ const createCustomerSerializer: CustomerCreationRequestHandler = (req, res, next
 
 const findCustomerSerializer: CustomerFindOneRequestHandler = (req, res, next) => {
     const { customerFind } = res.locals;
-    if(customerFind !== null){
+    if (customerFind !== null) {
         res.locals.customerToRespond = {
             uuid: customerFind.uuid,
             name: customerFind.name,
@@ -40,7 +40,36 @@ const findCustomerSerializer: CustomerFindOneRequestHandler = (req, res, next) =
     next();
 }
 
+const findAllCustomersSerializer: CustomerFindAllRequestHandler = (req, res, next) => {
+
+    const allCustomers = res.locals.customerFindAll;
+
+    res.locals.customersToRespond = [];
+
+    allCustomers.map((customer) => {
+        if (customer !== null) {
+            res.locals.customersToRespond.push(
+                {
+                    uuid: customer.uuid,
+                    name: customer.name,
+                    contact: {
+                        email: customer.email,
+                        phone: customer.phone
+                    },
+                    document: {
+                        cpf: customer.cpf,
+                        cnpj: customer.cnpj
+                    },
+                    createdAt: customer.createdAt.toISOString(),
+                    updatedAt: customer.updatedAt.toISOString()
+                })
+        }
+    });
+    next();
+}
+
 export {
     createCustomerSerializer,
-    findCustomerSerializer
+    findCustomerSerializer,
+    findAllCustomersSerializer
 }

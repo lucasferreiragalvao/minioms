@@ -1,8 +1,9 @@
 import { CREATED, NOT_FOUND, OK } from "http-status";
-import { getCustomerById, persistCustomer } from "./customer-business";
+import { paginationSerializer } from "../../util/serializer/pagination";
+import { getAllCustomers, getCustomerById, persistCustomer } from "./customer-business";
 import { createCustomerDeserializer } from "./customer-deserializer";
-import { createCustomerSerializer, findCustomerSerializer } from "./customer-serializer";
-import { CustomerCreationRequestHandler, CustomerFindOneRequestHandler } from "./customer-type";
+import { createCustomerSerializer, findAllCustomersSerializer, findCustomerSerializer } from "./customer-serializer";
+import { CustomerCreationRequestHandler, CustomerFindAllRequestHandler, CustomerFindOneRequestHandler } from "./customer-type";
 import { createCustomerValidator, getCustomerValidator } from "./customer-validator";
 
 const createCustomer = (): CustomerCreationRequestHandler[] => {
@@ -30,7 +31,23 @@ const findOneCustomer = (): CustomerFindOneRequestHandler[] => {
     ]
 }
 
+const findAllCustomers = (): CustomerFindAllRequestHandler[] => {
+    return [
+        paginationSerializer,
+        getAllCustomers,
+        findAllCustomersSerializer,
+        (req, res) => {
+            if(res.locals.customersToRespond.length > 0){
+                res.status(OK).json(res.locals.customersToRespond);
+            }else{
+                res.status(NOT_FOUND).json();
+            }
+        }
+    ];
+}
+
 export {
     createCustomer,
-    findOneCustomer
+    findOneCustomer,
+    findAllCustomers
 };
