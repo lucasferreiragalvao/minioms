@@ -1,5 +1,5 @@
 import { Customer } from "./customer-model";
-import { CustomerCreationRequestHandler } from "./customer-type";
+import { CustomerCreationRequestHandler, CustomerFindOneRequestHandler } from "./customer-type";
 
 const persistCustomer: CustomerCreationRequestHandler = async (req, res, next) => {
     try {
@@ -11,6 +11,17 @@ const persistCustomer: CustomerCreationRequestHandler = async (req, res, next) =
     }
 }
 
+const getCustomerById: CustomerFindOneRequestHandler = async (req, res ,next) => {
+    try {
+        const uuid = req.params.id;
+        res.locals.customerFind = await Customer.findByPk(uuid);
+        next();
+    } catch(error){
+        next(error);
+    }
+}
+
 export {
-    persistCustomer
+    persistCustomer,
+    getCustomerById
 }

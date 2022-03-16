@@ -33,6 +33,8 @@ type CustomerResponse = CustomerCreationRequest & {
     updatedAt: string;
 }
 
+type Customer = CustomerAttributes | null;
+
 export abstract class CustomerModel extends Model<CustomerAttributes, CustomerCreationAttributes>{};
 
 export type CustomerCreationRequestHandler = RequestHandler<
@@ -45,4 +47,18 @@ export type CustomerCreationRequestHandler = RequestHandler<
         customerCreated: CustomerAttributes,
         customerToRespond: CustomerResponse
     }
+>;
+
+export type CustomerFindOneRequestHandler = RequestHandler<
+  {
+    id: string;
+  },
+  CustomerResponse,
+  {},
+  {},
+  {
+    customerFind: Customer,
+    customerToRespond: CustomerResponse
+  }
+
 >;
